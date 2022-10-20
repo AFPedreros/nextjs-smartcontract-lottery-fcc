@@ -1,9 +1,9 @@
-// import { ConnectButton } from "web3uikit"
+import { ConnectButton } from "web3uikit"
 
-// export default function Header() {
-//     return (
-//         <div>
-//             <ConnectButton moralisAuth={false} />
-//         </div>
-//     )
-// }
+export default function Header() {
+    return (
+        <div>
+            <ConnectButton moralisAuth={false} />
+        </div>
+    )
+}
