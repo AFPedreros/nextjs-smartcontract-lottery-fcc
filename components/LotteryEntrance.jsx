@@ -83,32 +83,46 @@ export default function LotteryEntrance() {
     }
 
     return (
-        <div className="p-5">
-            Lottery Entrance
+        <div className="p-16 bg-gradient-to-r from-gray-900  via-gray-900 to-emerald-900 mt-6 mx-4 rounded-lg">
             {lotteryAddress ? (
-                <div>
-                    <button
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                        onClick={async () => {
-                            await enterLottery({
-                                onSuccess: handleSuccess,
-                                onError: (error) => console.log(error),
-                            })
-                        }}
-                        disabled={isLoading || isFetching}
-                    >
-                        {isLoading || isFetching ? (
-                            <div className="animate-spin spinner-border h-8 w-8 border-b-2 rounded-full"></div>
-                        ) : (
-                            "Enter Lottery"
-                        )}
-                    </button>
+                <div className="flex">
                     <div>
-                        Entrance Fee:{" "}
-                        {ethers.utils.formatUnits(entranceFee, "ether")}
+                        <h1 className="text-5xl font-bold w-2/3">
+                            New Crypto Lottery - Win your first price with ETH
+                            Lottery
+                        </h1>
+                        <button
+                            className="bg-emerald-700 hover:bg-emerald-900 text-white font-bold py-2 px-4 rounded mt-32"
+                            onClick={async () => {
+                                await enterLottery({
+                                    onSuccess: handleSuccess,
+                                    onError: (error) => console.log(error),
+                                })
+                            }}
+                            disabled={isLoading || isFetching}
+                        >
+                            {isLoading || isFetching ? (
+                                <div className="animate-spin spinner-border h-8 w-8 border-b-2 rounded-full"></div>
+                            ) : (
+                                "Enter Lottery"
+                            )}
+                        </button>
                     </div>
-                    <div>ETH Players: {numPlayers}</div>
-                    <div>Recent Winner: {recentWinner}</div>
+                    <div className="grid justify-items-center grid-rows-3 gap-6 w-2/3 px-6">
+                        <div className="w-1/2 self-center border-2 border-emerald-900 rounded-lg p-4">
+                            <h2 className="text-xl">Entrance Fee:</h2>
+                            {ethers.utils.formatUnits(entranceFee, "ether")} ETH
+                        </div>
+                        <div className="w-1/2 self-center border-2 border-emerald-900 rounded-lg p-4">
+                            <h2 className="text-2xl">Players:</h2>
+                            {numPlayers}
+                        </div>
+                        <div className="w-1/2 self-center border-2 border-emerald-900 rounded-lg p-4">
+                            <h2 className="text-2xl"> Recent Winner:</h2>
+                            {recentWinner.slice(0, 5)}...
+                            {recentWinner.slice(recentWinner.length - 4)}
+                        </div>
+                    </div>
                 </div>
             ) : (
                 <div>No lottery address detected</div>
